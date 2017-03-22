@@ -148,17 +148,25 @@ def get_xb_ratio(grg_data):
             assert(not is_abstract(comp['impedance']['reactance']))
             x = float(comp['impedance']['reactance'])
 
-            b = 0.0
+            #b = 0.0
             if 'from_shunt' in comp:
                 assert(not is_abstract(comp['from_shunt']['susceptance']))
-                b += float(comp['from_shunt']['susceptance'])
+                #b += float(comp['from_shunt']['susceptance'])
+                b = float(comp['from_shunt']['susceptance'])
+
+                if not math.isclose(x, 0.0) and not math.isclose(b, 0.0):
+                    line_xb_ratio.append(abs(x/b))
 
             if 'to_shunt' in comp:
                 assert(not is_abstract(comp['to_shunt']['susceptance']))
-                b += float(comp['to_shunt']['susceptance'])
+                #b += float(comp['to_shunt']['susceptance'])]
+                b = float(comp['to_shunt']['susceptance'])
 
-            if not math.isclose(x, 0.0) and not math.isclose(b, 0.0):
-                line_xb_ratio.append(abs(x/b))
+                if not math.isclose(x, 0.0) and not math.isclose(b, 0.0):
+                    line_xb_ratio.append(abs(x/b))
+
+#            if not math.isclose(x, 0.0) and not math.isclose(b, 0.0):
+#                line_xb_ratio.append(abs(x/b))
 
     return line_xb_ratio
 
@@ -199,12 +207,12 @@ def plot_hist(data, bins=20, xlabel='', file_name=None, core_plot=False):
     plt.clf()
 
     if not core_plot:
-        q = numpy.percentile(data, [20.0, 80.0])
+        q = numpy.percentile(data, [10.0, 90.0])
         core_data = [x for x in data if x >= q[0] and x <= q[1]]
         core_file = None
         if file_name != None:
             core_file = file_name.replace('.', '_core.')
-        plot_hist(core_data, bins=bins, xlabel=xlabel+' (20%-80% quant.)', file_name=core_file, core_plot=True)
+        plot_hist(core_data, bins=bins, xlabel=xlabel+' (10%-90% quant.)', file_name=core_file, core_plot=True)
 
 
 
