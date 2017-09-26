@@ -20,15 +20,17 @@ log_handler = logging.StreamHandler(log_stream)
 logger.addHandler(log_handler)
 
 #nesta_dir = '../grg-nesta/opf'
-nesta_dir = '../grg-nesta-plus'
+#nesta_dir = '../grg-nesta-plus'
+#nesta_dir = '../grg-grgdata/grg_grgdata/test/data/nesta'
+nesta_dir = '../grg-tamu-cases/grg'
 
 columns = [
-    'logical_bus',
+    'bus',
     'shunt',
     'load',
     'generator',
     'synchronous_condenser',
-    'line',
+    'ac_line',
     'two_winding_transformer'
 ]
 
@@ -69,25 +71,33 @@ def main():
         count += 1
 
 
-
 def count_devices(data):
     counts = {}
-    for k,v in data['network']['components'].items():
+    for k,v in grg_grgdata.cmd.walk_components(data):
         comp_type = v['type']
         if comp_type not in counts:
             counts[comp_type] = 0
         counts[comp_type] = counts[comp_type] + 1
     return counts
 
+
 def count_warnings(string):
+    print(string)
     counts = {}
-    counts['logical_bus'] = string.count('bus_')
-    counts['shunt'] = string.count('shunt_')
+    counts['bus'] = string.count('bus_')
+    #counts['shunt'] = string.count('shunt_')
     counts['load'] = string.count('load_')
     counts['generator'] = string.count('gen_')
     counts['synchronous_condenser'] = string.count('sync_cond_')
-    counts['line'] = string.count('line_')
+    counts['ac_line'] = string.count('line_')
     counts['two_winding_transformer'] = string.count('transformer_')
+
+    # needed becouse of shunt warnings on lines
+    counts['shunt'] = 0
+    for line in string.split('\n'):
+        if not 'line_' in line and 'shunt_' in line:
+            counts['shunt'] = counts['shunt'] + 1
+
     messages = string.count('\n')
     if messages != sum(counts.values()):
         print(messages)

@@ -13,7 +13,8 @@ from grg_grgdata.common import min_value
 from grg_grgdata.common import max_value
 
 #nesta_dir = '../grg-nesta/opf'
-nesta_dir = '../grg-nesta-plus'
+#nesta_dir = '../grg-nesta-plus'
+nesta_dir = '../grg-grgdata/grg_grgdata/test/data'
 
 
 def main():
@@ -60,18 +61,18 @@ def main():
         #    break
         count += 1
 
-    plot_hist([i for i in itertools.chain.from_iterable(trans_tap_val_lookup.values())], xlabel='Tap Ratio (p.u.)', file_name='tap.pdf')
-    plot_hist([i for i in itertools.chain.from_iterable(trans_shift_val_lookup.values())], xlabel='Angle Shift (rad.)', file_name='shift.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(trans_tap_val_lookup.values())], xlabel='Tap Ratio (p.u.)', file_name='tap.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(trans_shift_val_lookup.values())], xlabel='Angle Shift (rad.)', file_name='shift.pdf')
 
-    plot_hist([i for i in itertools.chain.from_iterable(vm_min_lookup.values())], xlabel='Voltage LB', file_name='vm_min.pdf')
-    plot_hist([i for i in itertools.chain.from_iterable(vm_max_lookup.values())], xlabel='Voltage UB', file_name='vm_max.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(vm_min_lookup.values())], xlabel='Voltage LB', file_name='vm_min.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(vm_max_lookup.values())], xlabel='Voltage UB', file_name='vm_max.pdf')
 
-    plot_hist([i for i in itertools.chain.from_iterable(line_xr_ratio_lookup.values())], xlabel='x/r ratio', file_name='line_xr_ratio.pdf')
-    plot_hist([i for i in itertools.chain.from_iterable(trans_xr_ratio_lookup.values())], xlabel='x/r ratio', file_name='trans_xr_ratio.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(line_xr_ratio_lookup.values())], xlabel='x/r ratio', file_name='line_xr_ratio.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(trans_xr_ratio_lookup.values())], xlabel='x/r ratio', file_name='trans_xr_ratio.pdf')
 
-    plot_hist([i for i in itertools.chain.from_iterable(line_xb_ratio_lookup.values())], xlabel='x/b ratio', file_name='line_xb_ratio.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(line_xb_ratio_lookup.values())], xlabel='x/b ratio', file_name='line_xb_ratio.pdf')
 
-    plot_hist([i for i in itertools.chain.from_iterable(gen_ar_ratio_lookup.values())], xlabel='active/reactive ratio', file_name='gen_ar_ratio.pdf')
+    # plot_hist([i for i in itertools.chain.from_iterable(gen_ar_ratio_lookup.values())], xlabel='active/reactive ratio', file_name='gen_ar_ratio.pdf')
 
     #print(vm_min_lookup)
 
