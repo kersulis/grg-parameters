@@ -22,7 +22,9 @@ logger.addHandler(log_handler)
 #nesta_dir = '../grg-nesta/opf'
 #nesta_dir = '../grg-nesta-plus'
 #nesta_dir = '../grg-grgdata/grg_grgdata/test/data/nesta'
-nesta_dir = '../grg-tamu-cases/grg'
+#nesta_dir = '../grg-tamu-cases/grg'
+
+nesta_dir = '../grg-pglib'
 
 columns = [
     'bus',
@@ -82,7 +84,7 @@ def count_devices(data):
 
 
 def count_warnings(string):
-    print(string)
+    #print(string)
     counts = {}
     counts['bus'] = string.count('bus_')
     #counts['shunt'] = string.count('shunt_')
